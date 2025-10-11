@@ -1,0 +1,16 @@
+Code éditeur ?
+Ajouter facilement des types d'objets (Armures, Armes, Consommable etc...)
+Ajouter facilement des objets (Icones, nom etc)
+Ajouter facilement des rareté d'objets
+Vérifier / Optimiser le tri d'objet
+Changer D'asset d'UI
+Coffre
+Support manette
+Shop system ?
+Craft system ?
+Equipement de stuff 
+Localization language
+
+
+Le Gamemanager doit s'exécuter avant tout le reste
+Quand on supprime un item il faut le retirer de la database
