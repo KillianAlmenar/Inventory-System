@@ -13,14 +13,14 @@ public class ScriptableObjectAutoRegister : AssetPostprocessor
         foreach (string path in importedAssets)
         {
             var asset = AssetDatabase.LoadAssetAtPath<ScriptableObject>(path);
-            if (asset is ItemInventory item)
+            if (asset is Item item)
             {
                 AddToItemDatabase(item);
             }
         }
     }
 
-    private static void AddToItemDatabase(ItemInventory item)
+    private static void AddToItemDatabase(Item item)
     {
         string[] databases = AssetDatabase.FindAssets("t:ItemDatabase");
         if (databases.Length > 0)

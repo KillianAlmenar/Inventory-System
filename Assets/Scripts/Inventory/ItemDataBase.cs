@@ -5,9 +5,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ItemDatabase", menuName = "Game/ItemDatabase")]
 public class ItemDatabase : ScriptableObject
 {
-    public List<ItemInventory> items = new List<ItemInventory>();
+    public List<Item> items = new List<Item>();
 
-    public void AddItem(ItemInventory item)
+    private void OnEnable()
+    {
+        items.RemoveAll(x => !x);
+    }
+
+    public void AddItem(Item item)
     {
         if (!items.Contains(item))
         {

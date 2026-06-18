@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9abb8689e2b864419ad740ea73aefeb, type: 3}
-  m_Name: Diamond Chestplate
+  m_Name: Heal Potion
   m_EditorClassIdentifier: 
-  type: 4
-  rarity: 0
-  itemName: 
-  description: 
-  icon: {fileID: 21300000, guid: 43b7b055e22c3014bb8a6c3c3efd9ef8, type: 3}
+  type: 2
+  rarity: 2
+  itemName: Heal Potion
+  description: Heal XX hp to player
+  icon: {fileID: 21300000, guid: fa5c2922582dac14abbfc5ea51171fa1, type: 3}
   stackSize: 1
-  id: -644712799
+  id: 1479062503
   weight: 0
   modules:
-  - {fileID: 11400000, guid: 1923cdf1fb3cb8044a66a3ba20136c10, type: 2}
+  - {fileID: 11400000, guid: f57092b7590f5c544b3519c50c191a22, type: 2}
   - {fileID: 11400000, guid: 2208eee4d0b194742837ac28c5fbe148, type: 2}

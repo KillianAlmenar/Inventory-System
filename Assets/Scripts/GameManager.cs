@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public PlayerInventoryUI playerInventoryUI;
     public OtherInventoryUI otherInventoryUI;
     public GameInput gameInput;
-
+    
 
     private void Awake()
     {

@@ -13,4 +13,3 @@ Localization language
 
 
 Le Gamemanager doit s'exécuter avant tout le reste
-Quand on supprime un item il faut le retirer de la database

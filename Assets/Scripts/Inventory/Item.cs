@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Item", menuName = "Item/Create New Item")]
-public class ItemInventory : ScriptableObject
+public class Item : ScriptableObject
 {
     public enum TYPE
     {
+        NONE,
         KEYITEM,
         CONSOMMABLE,
         WEAPON,
         ARMOR,
         RESSOURCE
     }
-    public TYPE type;
+    [ReadOnly] public TYPE type;
 
     public enum RARITY
     {
@@ -28,10 +29,38 @@ public class ItemInventory : ScriptableObject
     public Sprite icon;
     public int stackSize;
     public int id;
+    public float weight = 0;
+    public List<ItemModule> modules = new List<ItemModule>();
+
 
     protected void OnValidate()
     {
         id = name.GetHashCode();
+
+        foreach (ItemModule module in modules)
+        {
+            if (module != null)
+            {
+                if (module.type != TYPE.NONE)
+                {
+                    type = module.type;
+                    break;
+                }
+            }
+        }
+
+        if(stackSize < 1)
+        {
+            stackSize = 1;
+        }
+    }
+
+    public void Use()
+    {
+        foreach (var m in modules)
+        {
+            if (m != null) m.OnUse(this);
+        }
     }
 
 }

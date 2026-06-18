@@ -1,15 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering;
 
 public class Inventory : MonoBehaviour
 {
-    public List<ItemInventory> items;
+    public List<Item> items;
 
-    public ItemInventory selectedItem;
+    public Item selectedItem;
 
-    public void DeleteItem(ItemInventory _item, int _amount)
+    public void DeleteItem(Item _item, int _amount)
     {
         for (int i = 0; i < _amount; i++)
         {
@@ -17,7 +16,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void AddItem(ItemInventory _item, int _amount)
+    public void AddItem(Item _item, int _amount)
     {
         for (int i = 0; i < _amount; i++)
         {
@@ -25,12 +24,12 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public int GetNumberOfItem(ItemInventory _item)
+    public int GetNumberOfItem(Item _item)
     {
         if(items.Contains(_item))
         {
             int quantity = 0;
-            foreach (ItemInventory item in items)
+            foreach (Item item in items)
             {
                 if(item == _item)
                 {
