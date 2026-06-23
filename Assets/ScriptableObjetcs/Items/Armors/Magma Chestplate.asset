@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Magma Chestplate
   m_EditorClassIdentifier: 
   type: 4
+  types:
+  - {fileID: 11400000, guid: d7be8d3f40fad1747946db9999b91f7b, type: 2}
   rarity: {fileID: 11400000, guid: 1485b8a6160628641994b3b817b9b175, type: 2}
   itemName: Magma Chestplate
   description: MAGMA !!

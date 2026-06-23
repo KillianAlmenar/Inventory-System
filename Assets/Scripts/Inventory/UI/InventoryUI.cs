@@ -44,7 +44,7 @@ public class InventoryUI : MonoBehaviour
 
     }
 
-    public SORTINGTYPE sortingType;
+    public ItemType sortingType;
 
     private void Start()
     {
@@ -71,6 +71,7 @@ public class InventoryUI : MonoBehaviour
     public void updateUI()
     {
         DesactivateUI();
+        List<string> itemsNameDisplayed = new List<string>(); //List of item already displayed to avoid UI duplication
         Dictionary<int, int> itemsId = new Dictionary<int, int>();
 
         for (int i = 0; i < ItemDatabase.items.Count; i++)
@@ -87,82 +88,50 @@ public class InventoryUI : MonoBehaviour
 
         foreach (Item item in Inventory.items)
         {
-            switch (sortingType)
+            if (!itemsNameDisplayed.Contains(item.name))
             {
-                case SORTINGTYPE.KEYITEM:
-                    if (item.type == Item.TYPE.KEYITEM)
-                    {
-                        sortingTypeBool[0] = true;
-                    }
-                    break;
-                case SORTINGTYPE.CONSOMMABLE:
-                    if (item.type == Item.TYPE.CONSOMMABLE)
-                    {
-                        sortingTypeBool[1] = true;
-                    }
-                    break;
-                case SORTINGTYPE.WEAPON:
-                    if (item.type == Item.TYPE.WEAPON)
-                    {
-                        sortingTypeBool[2] = true;
-                    }
-                    break;
-                case SORTINGTYPE.ARMOR:
-                    if (item.type == Item.TYPE.ARMOR)
-                    {
-                        sortingTypeBool[3] = true;
-                    }
-                    break;
-                case SORTINGTYPE.RESSOURCE:
-                    if (item.type == Item.TYPE.RESSOURCE)
-                    {
-                        sortingTypeBool[4] = true;
-                    }
-                    break;
-            }
+                itemsNameDisplayed.Add(item.name);
 
-
-            if (sortingType == SORTINGTYPE.ALL || sortingTypeBool[0] || sortingTypeBool[1] || sortingTypeBool[2] || sortingTypeBool[3] || sortingTypeBool[4])
-            {
-                Debug.Log(sortingType);
-                if (itemsId[item.id] > 0)
+                if (item.types.Contains(sortingType) || sortingType == null) //Add All button sort
                 {
-                    for (int j = 0; j < itemsId[item.id]; j += GetItemById(item.id).stackSize)
+                    if (itemsId[item.id] > 0)
                     {
-                        GameObject tempItemUI = Instantiate(itemUI, contentUI.transform);
-                        tempItemUI.GetComponentsInChildren<Image>()[1].sprite = GetItemById(item.id).icon;
-
-                        int itemQuantityInSlot = GetItemById(item.id).stackSize;
-                        if (GetItemById(item.id).stackSize > 1 && j + 1 * GetItemById(item.id).stackSize >= itemsId[item.id])
-                            itemQuantityInSlot = itemsId[item.id] % GetItemById(item.id).stackSize;
-
-                        if (itemQuantityInSlot == 0)
-                            itemQuantityInSlot = GetItemById(item.id).stackSize;
-
-                        if (itemQuantityInSlot == 1)
+                        for (int j = 0; j < itemsId[item.id]; j += GetItemById(item.id).stackSize)
                         {
-                            tempItemUI.GetComponentInChildren<TextMeshProUGUI>().text = " ";
-                        }
-                        else
-                        {
-                            tempItemUI.GetComponentInChildren<TextMeshProUGUI>().text = itemQuantityInSlot.ToString();
+                            GameObject tempItemUI = Instantiate(itemUI, contentUI.transform);
+                            tempItemUI.GetComponentsInChildren<Image>()[1].sprite = GetItemById(item.id).icon;
+
+                            int itemQuantityInSlot = GetItemById(item.id).stackSize;
+                            if (GetItemById(item.id).stackSize > 1 && j + 1 * GetItemById(item.id).stackSize >= itemsId[item.id])
+                                itemQuantityInSlot = itemsId[item.id] % GetItemById(item.id).stackSize;
+
+                            if (itemQuantityInSlot == 0)
+                                itemQuantityInSlot = GetItemById(item.id).stackSize;
+
+                            if (itemQuantityInSlot == 1)
+                            {
+                                tempItemUI.GetComponentInChildren<TextMeshProUGUI>().text = " ";
+                            }
+                            else
+                            {
+                                tempItemUI.GetComponentInChildren<TextMeshProUGUI>().text = itemQuantityInSlot.ToString();
+                            }
+
+                            SelectItem tempItemSelect = tempItemUI.GetComponentInChildren<SelectItem>();
+                            tempItemSelect.item = GetItemById(item.id);
+                            tempItemSelect.inventoryUI = this;
+
+                            tempItemUI.GetComponentsInChildren<Image>()[0].color = GetItemById(item.id).rarity.color;
                         }
 
-                        SelectItem tempItemSelect = tempItemUI.GetComponentInChildren<SelectItem>();
-                        tempItemSelect.item = GetItemById(item.id);
-                        tempItemSelect.inventoryUI = this;
-
-                        tempItemUI.GetComponentsInChildren<Image>()[0].color = GetItemById(item.id).rarity.color;
                     }
+                }
 
+                for (int i = 0; i < 5; i++)
+                {
+                    sortingTypeBool[i] = false;
                 }
             }
-
-            for (int i = 0; i < 5; i++)
-            {
-                sortingTypeBool[i] = false;
-            }
-
         }
 
     }

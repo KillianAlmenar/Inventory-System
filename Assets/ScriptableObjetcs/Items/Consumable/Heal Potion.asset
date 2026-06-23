@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Heal Potion
   m_EditorClassIdentifier: 
   type: 2
+  types:
+  - {fileID: 11400000, guid: df5800881d403e343a979147446dbded, type: 2}
   rarity: {fileID: 11400000, guid: 931b59dfcbf1a1a46bb435d1a2ad89d8, type: 2}
   itemName: Heal Potion
   description: Heal XX hp to player

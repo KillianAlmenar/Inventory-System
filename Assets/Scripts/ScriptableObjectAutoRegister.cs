@@ -17,6 +17,10 @@ public class ScriptableObjectAutoRegister : AssetPostprocessor
             {
                 AddToItemDatabase(item);
             }
+            else if (asset is ItemType itemType)
+            {
+                AddToTypeDatabase(itemType);
+            }
         }
     }
 
@@ -39,5 +43,26 @@ public class ScriptableObjectAutoRegister : AssetPostprocessor
             Debug.LogWarning("Aucune base de données d'items trouvée !");
         }
     }
+
+    private static void AddToTypeDatabase(ItemType itemType)
+    {
+        string[] databases = AssetDatabase.FindAssets("t:ItemTypeDataBase");
+        if (databases.Length > 0)
+        {
+            string databasePath = AssetDatabase.GUIDToAssetPath(databases[0]);
+            var database = AssetDatabase.LoadAssetAtPath<ItemTypeDataBase>(databasePath);
+            if (database != null)
+            {
+                database.AddType(itemType);
+                EditorUtility.SetDirty(database);
+                Debug.Log($"Item {itemType.name} ajouté à la base de données.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Aucune base de données d'items trouvée !");
+        }
+    }
+
 }
 #endif

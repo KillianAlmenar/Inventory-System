@@ -1,49 +1,34 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InvCategory : MonoBehaviour
 {
-    [SerializeField] InventoryUI inventoryUI;
-    public void AllPressed()
+    [SerializeField] private InventoryUI inventoryUI;
+    [SerializeField] private GameObject buttonPrefab;
+    [SerializeField] private GameObject buttonContent;
+    [SerializeField] private ItemTypeDataBase typeDatabase;
+
+    private void Start()
     {
-        inventoryUI.sortingType = InventoryUI.SORTINGTYPE.ALL;
+        foreach (ItemType type in typeDatabase.types)
+        {
+            GameObject button = Instantiate(buttonPrefab, buttonContent.transform);
+            button.GetComponent<Image>().sprite = type.icon;
+            button.name = type.name;
+            button.GetComponent<CategoryButton>().buttonType = type;
+        }
+    }
+
+    public void UpdateCategorySort(ItemType _type)
+    {
+        inventoryUI.sortingType = _type;
         inventoryUI.updateUI();
     }
 
-    public void WeaponPressed()
+    public void ButtonAllPressed()
     {
-        inventoryUI.sortingType = InventoryUI.SORTINGTYPE.WEAPON;
+        inventoryUI.sortingType = null;
         inventoryUI.updateUI();
     }
-
-    public void KeyItemPressed()
-    {
-        inventoryUI.sortingType = InventoryUI.SORTINGTYPE.KEYITEM;
-        inventoryUI.updateUI();
-
-    }
-
-    public void ConsommablePressed()
-    {
-        inventoryUI.sortingType = InventoryUI.SORTINGTYPE.CONSOMMABLE;
-        inventoryUI.updateUI();
-
-    }
-
-    public void ArmorPressed()
-    {
-        inventoryUI.sortingType = InventoryUI.SORTINGTYPE.ARMOR;
-        inventoryUI.updateUI();
-
-    }
-
-    public void RessourcePressed()
-    {
-        inventoryUI.sortingType = InventoryUI.SORTINGTYPE.RESSOURCE;
-        inventoryUI.updateUI();
-
-    }
-
 
 }

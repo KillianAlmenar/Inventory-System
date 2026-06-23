@@ -15,6 +15,7 @@ MonoBehaviour:
   type: 4
   types:
   - {fileID: 11400000, guid: d7be8d3f40fad1747946db9999b91f7b, type: 2}
+  - {fileID: 11400000, guid: d3963ec38c0a4784b8b77d5298df53b7, type: 2}
   rarity: {fileID: 11400000, guid: 7687b05a314daee47aece5ab24e8db43, type: 2}
   itemName: 
   description: 

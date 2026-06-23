@@ -9,17 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9abb8689e2b864419ad740ea73aefeb, type: 3}
-  m_Name: Ruby Chestplate
+  m_Script: {fileID: 11500000, guid: b9d44aa39db80b54f873a9605a3d02bc, type: 3}
+  m_Name: ItemTypeDataBase
   m_EditorClassIdentifier: 
-  type: 0
   types:
+  - {fileID: 11400000, guid: d3963ec38c0a4784b8b77d5298df53b7, type: 2}
   - {fileID: 11400000, guid: d7be8d3f40fad1747946db9999b91f7b, type: 2}
-  rarity: {fileID: 11400000, guid: 2172fa2c6db73f244bb84188443ed5d7, type: 2}
-  itemName: 
-  description: 
-  icon: {fileID: 21300000, guid: d659f7396cd57754eba78763cf986c51, type: 3}
-  stackSize: 1
-  id: 1641559625
-  weight: 0
-  modules: []
+  - {fileID: 11400000, guid: 3e4704bc5e7a10b4581fcd30b36e62a6, type: 2}
+  - {fileID: 11400000, guid: df5800881d403e343a979147446dbded, type: 2}

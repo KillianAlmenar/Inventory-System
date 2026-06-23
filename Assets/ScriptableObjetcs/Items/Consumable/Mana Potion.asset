@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Mana Potion
   m_EditorClassIdentifier: 
   type: 2
-  types: []
+  types:
+  - {fileID: 11400000, guid: df5800881d403e343a979147446dbded, type: 2}
   rarity: {fileID: 11400000, guid: 2172fa2c6db73f244bb84188443ed5d7, type: 2}
   itemName: Mana Potion
   description: Restaure XX point of mana
