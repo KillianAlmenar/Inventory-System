@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Item/Create New Modules/KeyItem Module")]
+[CreateAssetMenu(menuName = "Inventory System/Create New Modules/KeyItem Module")]
 public class KeyItemModule : ItemModule
 {
     public override void OnUse(Item item)

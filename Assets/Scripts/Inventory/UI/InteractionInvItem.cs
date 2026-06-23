@@ -80,10 +80,10 @@ public class InteractionInvItem : MonoBehaviour
 
         }
 
-        GameManager.Instance.playerInventoryUI.updateUI();
-        if (GameManager.Instance.playerInventoryUI.inChest)
+        InventoryManager.Instance.playerInventoryUI.updateUI();
+        if (InventoryManager.Instance.playerInventoryUI.inChest)
         {
-            GameManager.Instance.otherInventoryUI.updateUI();
+            InventoryManager.Instance.otherInventoryUI.updateUI();
         }
     }
 

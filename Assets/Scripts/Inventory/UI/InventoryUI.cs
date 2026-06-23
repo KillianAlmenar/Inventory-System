@@ -72,7 +72,6 @@ public class InventoryUI : MonoBehaviour
     {
         DesactivateUI();
         Dictionary<int, int> itemsId = new Dictionary<int, int>();
-        List<string> itemsNameDisplayed = new List<string>();
 
         for (int i = 0; i < ItemDatabase.items.Count; i++)
         {
@@ -88,95 +87,84 @@ public class InventoryUI : MonoBehaviour
 
         foreach (Item item in Inventory.items)
         {
-            if (!itemsNameDisplayed.Contains(item.name))
+            switch (sortingType)
             {
-                itemsNameDisplayed.Add(item.name);
-
-                switch (sortingType)
-                {
-                    case SORTINGTYPE.KEYITEM:
-                        if (item.type == Item.TYPE.KEYITEM)
-                        {
-                            sortingTypeBool[0] = true;
-                        }
-                        break;
-                    case SORTINGTYPE.CONSOMMABLE:
-                        if (item.type == Item.TYPE.CONSOMMABLE)
-                        {
-                            sortingTypeBool[1] = true;
-                        }
-                        break;
-                    case SORTINGTYPE.WEAPON:
-                        if (item.type == Item.TYPE.WEAPON)
-                        {
-                            sortingTypeBool[2] = true;
-                        }
-                        break;
-                    case SORTINGTYPE.ARMOR:
-                        if (item.type == Item.TYPE.ARMOR)
-                        {
-                            sortingTypeBool[3] = true;
-                        }
-                        break;
-                    case SORTINGTYPE.RESSOURCE:
-                        if (item.type == Item.TYPE.RESSOURCE)
-                        {
-                            sortingTypeBool[4] = true;
-                        }
-                        break;
-                }
-
-                if (sortingType == SORTINGTYPE.ALL || sortingTypeBool[0] || sortingTypeBool[1] || sortingTypeBool[2] || sortingTypeBool[3] || sortingTypeBool[4])
-                {
-                    if (itemsId[item.id] > 0)
+                case SORTINGTYPE.KEYITEM:
+                    if (item.type == Item.TYPE.KEYITEM)
                     {
-                        for (int j = 0; j < itemsId[item.id]; j += GetItemById(item.id).stackSize)
+                        sortingTypeBool[0] = true;
+                    }
+                    break;
+                case SORTINGTYPE.CONSOMMABLE:
+                    if (item.type == Item.TYPE.CONSOMMABLE)
+                    {
+                        sortingTypeBool[1] = true;
+                    }
+                    break;
+                case SORTINGTYPE.WEAPON:
+                    if (item.type == Item.TYPE.WEAPON)
+                    {
+                        sortingTypeBool[2] = true;
+                    }
+                    break;
+                case SORTINGTYPE.ARMOR:
+                    if (item.type == Item.TYPE.ARMOR)
+                    {
+                        sortingTypeBool[3] = true;
+                    }
+                    break;
+                case SORTINGTYPE.RESSOURCE:
+                    if (item.type == Item.TYPE.RESSOURCE)
+                    {
+                        sortingTypeBool[4] = true;
+                    }
+                    break;
+            }
+
+
+            if (sortingType == SORTINGTYPE.ALL || sortingTypeBool[0] || sortingTypeBool[1] || sortingTypeBool[2] || sortingTypeBool[3] || sortingTypeBool[4])
+            {
+                Debug.Log(sortingType);
+                if (itemsId[item.id] > 0)
+                {
+                    for (int j = 0; j < itemsId[item.id]; j += GetItemById(item.id).stackSize)
+                    {
+                        GameObject tempItemUI = Instantiate(itemUI, contentUI.transform);
+                        tempItemUI.GetComponentsInChildren<Image>()[1].sprite = GetItemById(item.id).icon;
+
+                        int itemQuantityInSlot = GetItemById(item.id).stackSize;
+                        if (GetItemById(item.id).stackSize > 1 && j + 1 * GetItemById(item.id).stackSize >= itemsId[item.id])
+                            itemQuantityInSlot = itemsId[item.id] % GetItemById(item.id).stackSize;
+
+                        if (itemQuantityInSlot == 0)
+                            itemQuantityInSlot = GetItemById(item.id).stackSize;
+
+                        if (itemQuantityInSlot == 1)
                         {
-                            GameObject tempItemUI = Instantiate(itemUI, contentUI.transform);
-                            tempItemUI.GetComponentsInChildren<Image>()[1].sprite = GetItemById(item.id).icon;
-
-                            int itemQuantityInSlot = GetItemById(item.id).stackSize;
-                            if (GetItemById(item.id).stackSize > 1 && j + 1 * GetItemById(item.id).stackSize >= itemsId[item.id])
-                                itemQuantityInSlot = itemsId[item.id] % GetItemById(item.id).stackSize;
-
-                            if(itemQuantityInSlot == 0)
-                                itemQuantityInSlot = GetItemById(item.id).stackSize;
-
-                            if (itemQuantityInSlot == 1)
-                            {
-                                tempItemUI.GetComponentInChildren<TextMeshProUGUI>().text = " ";
-                            }
-                            else
-                            {
-                                Debug.Log(itemQuantityInSlot);
-                                tempItemUI.GetComponentInChildren<TextMeshProUGUI>().text = itemQuantityInSlot.ToString();
-                            }
-
-                            SelectItem tempItemSelect = tempItemUI.GetComponentInChildren<SelectItem>();
-                            tempItemSelect.item = GetItemById(item.id);
-                            tempItemSelect.inventoryUI = this;
-
-                            switch (GetItemById(item.id).rarity)
-                            {
-                                case Item.RARITY.LEGENDARY:
-                                    tempItemUI.GetComponentsInChildren<Image>()[0].color = new Color(255, 215, 0, 1);
-                                    break;
-                                case Item.RARITY.RARE:
-                                    tempItemUI.GetComponentsInChildren<Image>()[0].color = new Color(146, 0, 255, 1);
-                                    break;
-                            }
+                            tempItemUI.GetComponentInChildren<TextMeshProUGUI>().text = " ";
+                        }
+                        else
+                        {
+                            tempItemUI.GetComponentInChildren<TextMeshProUGUI>().text = itemQuantityInSlot.ToString();
                         }
 
+                        SelectItem tempItemSelect = tempItemUI.GetComponentInChildren<SelectItem>();
+                        tempItemSelect.item = GetItemById(item.id);
+                        tempItemSelect.inventoryUI = this;
+
+                        tempItemUI.GetComponentsInChildren<Image>()[0].color = GetItemById(item.id).rarity.color;
                     }
-                }
 
-                for (int i = 0; i < 5; i++)
-                {
-                    sortingTypeBool[i] = false;
                 }
-
             }
+
+            for (int i = 0; i < 5; i++)
+            {
+                sortingTypeBool[i] = false;
+            }
+
         }
+
     }
 
     private void DesactivateUI()
@@ -319,17 +307,17 @@ public class InventoryUI : MonoBehaviour
                     for (int i = 0; i < itemListSorted.Count;)
                     {
 
-                        if (item.rarity < itemListSorted[i].rarity)
+                        if (item.rarity.sortOrder > itemListSorted[i].rarity.sortOrder)
                         {
                             itemListSorted.Insert(i, item);
                             break;
                         }
-                        else if (item.rarity > itemListSorted[i].rarity)
+                        else if (item.rarity.sortOrder < itemListSorted[i].rarity.sortOrder)
                         {
                             int compteur = i;
                             while (itemListSorted.Count > compteur)
                             {
-                                if (item.rarity < itemListSorted[compteur].rarity)
+                                if (item.rarity.sortOrder > itemListSorted[compteur].rarity.sortOrder)
                                 {
                                     break;
                                 }

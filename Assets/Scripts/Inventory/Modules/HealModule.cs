@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Item/Create New Modules/HealModule")]
+[CreateAssetMenu(menuName = "Inventory System/Create New Modules/HealModule")]
 public class HealModule : ItemModule
 {
     public float HealedHP = 0;

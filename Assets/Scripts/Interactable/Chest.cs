@@ -13,21 +13,21 @@ public class Chest : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        if (!GameManager.Instance.otherInventoryUI.isDisplay)
+        if (!InventoryManager.Instance.otherInventoryUI.isDisplay)
         {
             Inventory currentInv = GetComponent<Inventory>();
-            InteractionInvItem currentInteract = GameManager.Instance.otherInventoryUI.interaction.GetComponent<InteractionInvItem>();
-            GameManager.Instance.otherInventoryUI.Inventory = currentInv;
-            GameManager.Instance.otherInventoryUI.isDisplay = true;
+            InteractionInvItem currentInteract = InventoryManager.Instance.otherInventoryUI.interaction.GetComponent<InteractionInvItem>();
+            InventoryManager.Instance.otherInventoryUI.Inventory = currentInv;
+            InventoryManager.Instance.otherInventoryUI.isDisplay = true;
             currentInteract.currentInv = currentInv;
-            currentInteract.targetInv = GameManager.Instance.Player.GetComponent<Inventory>();
+            currentInteract.targetInv = InventoryManager.Instance.Player.GetComponent<Inventory>();
 
-            GameManager.Instance.playerInventoryUI.isDisplay = true;
-            GameManager.Instance.playerInventoryUI.inChest = true;
-            GameManager.Instance.playerInventoryUI.interaction.GetComponent<InteractionInvItem>().targetInv = currentInv;
+            InventoryManager.Instance.playerInventoryUI.isDisplay = true;
+            InventoryManager.Instance.playerInventoryUI.inChest = true;
+            InventoryManager.Instance.playerInventoryUI.interaction.GetComponent<InteractionInvItem>().targetInv = currentInv;
 
-            GameManager.Instance.gameInput.Player.Disable();
-            GameManager.Instance.gameInput.UI.Enable();
+            InventoryManager.Instance.gameInput.Player.Disable();
+            InventoryManager.Instance.gameInput.UI.Enable();
         }
     }
 }

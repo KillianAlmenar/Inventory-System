@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Item/Create New Modules/ManaModule")]
+[CreateAssetMenu(menuName = "Inventory System/Create New Modules/ManaModule")]
 public class ManaModule : ItemModule
 {
     [SerializeField] private float manaRestored = 0;

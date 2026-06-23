@@ -19,20 +19,7 @@ public class InformationInv : MonoBehaviour
         itemName.text = _selectedItem.name;
         description.text = _selectedItem.description;
         icon.sprite = _selectedItem.icon;
-
-        switch (_selectedItem.rarity)
-        {
-            case Item.RARITY.COMMUN:
-                rarity.text = "Commun item";
-                break;
-            case Item.RARITY.RARE:
-                rarity.text = "Rare item";
-                break;
-            case Item.RARITY.LEGENDARY:
-                rarity.text = "Legendary item";
-                break;
-        }
-
+        rarity.text = _selectedItem.rarity.displayName;
         weight.text = _selectedItem.weight.ToString() + " lbs";
 
     }

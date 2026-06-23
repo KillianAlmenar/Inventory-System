@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Item", menuName = "Item/Create New Item")]
+[CreateAssetMenu(fileName = "New Item", menuName = "Inventory System/Create New Item")]
 public class Item : ScriptableObject
 {
     public enum TYPE
@@ -16,14 +16,9 @@ public class Item : ScriptableObject
     }
     [ReadOnly] public TYPE type;
 
-    public enum RARITY
-    {
-        LEGENDARY,
-        RARE,
-        COMMUN
-    }
-    public RARITY rarity;
+    public List<ItemType> types = new List<ItemType>();
 
+    public ItemRarity rarity;
     public string itemName;
     public string description;
     public Sprite icon;

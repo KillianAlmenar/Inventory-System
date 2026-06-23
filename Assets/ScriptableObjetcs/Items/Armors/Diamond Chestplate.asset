@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Diamond Chestplate
   m_EditorClassIdentifier: 
   type: 4
-  rarity: 0
+  types:
+  - {fileID: 11400000, guid: d7be8d3f40fad1747946db9999b91f7b, type: 2}
+  rarity: {fileID: 11400000, guid: 7687b05a314daee47aece5ab24e8db43, type: 2}
   itemName: 
   description: 
   icon: {fileID: 21300000, guid: 43b7b055e22c3014bb8a6c3c3efd9ef8, type: 3}

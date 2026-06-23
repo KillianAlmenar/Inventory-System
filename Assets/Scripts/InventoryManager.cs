@@ -1,15 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class InventoryManager : MonoBehaviour
 {
-    public static GameManager Instance;
+    public static InventoryManager Instance;
     public GameObject Player;
     public PlayerInventoryUI playerInventoryUI;
     public OtherInventoryUI otherInventoryUI;
     public GameInput gameInput;
-    
 
     private void Awake()
     {
